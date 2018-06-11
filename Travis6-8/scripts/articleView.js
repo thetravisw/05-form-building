@@ -74,7 +74,7 @@ articleView.setTeasers = () => {
   });
 };
 
-// COMMENT: Where is this function called? Why?
+// COMMENT: In new.html because it should run ONLY when that page is loaded, and only once.
 // PUT YOUR RESPONSE HERE
 articleView.initNewArticlePage = () => {
   // TODO: Ensure the main .tab-content area is revealed. We might add more tabs later or otherwise edit the tab navigation.  
@@ -92,7 +92,22 @@ articleView.initNewArticlePage = () => {
   // TODO: Add an event handler to update the preview and the export field if any inputs change.
   // Done
   $('#new-form').on('change', articleView.create);
+
+  $('#preview').on('click', articleView.previewClicked)  
+  $('#write').on('click', articleView.writeClicked) 
 };
+
+articleView.previewClicked = () => {
+  $('#new-form').hide()
+  $('#articles').show()
+  articleView.create()
+}
+
+articleView.writeClicked = () => {
+  $('#articles').hide()
+  $('#new-form').show()
+}
+
 
 articleView.create = () => {
   // TODO: Set up a variable to hold the new article we are creating.
@@ -115,11 +130,11 @@ articleView.create = () => {
 
   // TODO: Use our interface to the Handblebars template to put this new article into the DOM: 
   // Done
-  $('articles').append(article.toHtml());
+  $('#articles').append(article.toHtml());
 
   // TODO: Activate the highlighting of any code blocks; look at the documentation for hljs to see how to do this by placing a callback function in the .each():  
-  // Uhhh wut?
   $('pre code').each();
+  //  Will get this done tonight.
 
   // TODO: Show our export field, and export the new article as JSON, so it's ready to copy/paste into blogArticles.js:  
   // Done
